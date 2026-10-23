@@ -1,0 +1,62 @@
+@model List<AlmaFloral.Web.Models.Producto>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Catálogo";
+    var culturaPeru = CultureInfo.GetCultureInfo("es-PE");
+}
+
+<section class="mb-4">
+    <h1 class="fw-bold" style="color: #214e35;">
+        Nuestro catálogo
+    </h1>
+    <p class="text-muted">
+        Descubre nuestros arreglos florales y plantas decorativas.
+    </p>
+</section>
+
+@if (Model.Count == 0)
+{
+    <p role="status">
+        Por el momento no hay productos disponibles para mostrar.
+    </p>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var producto in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <article class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="h5 text-success">
+                            @producto.Nombre
+                        </h2>
+
+                        <p>@producto.Descripcion</p>
+
+                        <p class="fs-4 fw-bold">
+                            S/ @producto.Precio.ToString("N2", culturaPeru)
+                        </p>
+
+                        @if (producto.Stock > 0)
+                        {
+                            <span class="badge text-bg-success">
+                                Disponible
+                            </span>
+                            <p class="small text-muted mt-2 mb-0">
+                                Unidades disponibles: @producto.Stock
+                            </p>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-secondary">
+                                Agotado
+                            </span>
+                        }
+                    </div>
+                </article>
+            </div>
+        }
+    </div>
+}
