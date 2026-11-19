@@ -1,10 +1,11 @@
-name: Integracion continua Alma Floral
+name: Integracion y entrega continua Alma Floral
 
 on:
   push:
     branches:
       - develop
       - ci/integracion-continua
+      - cd/paquete-publicacion
   pull_request:
     branches:
       - develop
@@ -14,8 +15,8 @@ permissions:
   contents: read
 
 jobs:
-  validar:
-    name: Compilar y ejecutar pruebas
+  validar-y-publicar:
+    name: Validar y preparar entrega
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -36,3 +37,15 @@ jobs:
 
       - name: Ejecutar pruebas automatizadas
         run: dotnet test tests/AlmaFloral.Web.Tests/AlmaFloral.Web.Tests.csproj --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
+
+      - name: Preparar aplicacion para entrega
+        run: dotnet publish src/AlmaFloral.Web/AlmaFloral.Web.csproj --configuration Release --no-build --output artifacts/publicacion
+
+      - name: Guardar paquete descargable
+        uses: actions/upload-artifact@v7
+        with:
+          name: alma-floral-publicacion-${{ github.run_number }}
+          path: artifacts/publicacion/
+          archive: true
+          if-no-files-found: error
+          retention-days: 30
