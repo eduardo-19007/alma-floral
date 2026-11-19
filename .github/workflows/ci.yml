@@ -1,0 +1,35 @@
+name: Integracion continua Alma Floral
+
+on:
+  push:
+    branches:
+      - develop
+      - ci/integracion-continua
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compilar:
+    name: Restaurar y compilar
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar codigo del repositorio
+        uses: actions/checkout@v7
+
+      - name: Preparar .NET 10
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restaurar dependencias
+        run: dotnet restore src/AlmaFloral.Web/AlmaFloral.Web.csproj
+
+      - name: Compilar proyecto
+        run: dotnet build src/AlmaFloral.Web/AlmaFloral.Web.csproj --configuration Release --no-restore
