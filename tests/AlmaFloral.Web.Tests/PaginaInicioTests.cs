@@ -51,6 +51,24 @@ public class PaginaInicioTests :
 
         Assert.Equal(HttpStatusCode.NotFound, respuesta.StatusCode);
     }
+    [Fact]
+    public async Task Catalogo_MuestraProductosPreciosYDisponibilidad()
+    {
+        var respuesta = await _cliente.GetAsync("/Catalogo");
+        var contenido = await respuesta.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.OK, respuesta.StatusCode);
+        Assert.Equal(
+            "text/html",
+            respuesta.Content.Headers.ContentType?.MediaType);
+
+        Assert.Contains("Ramo de rosas", contenido);
+        Assert.Contains("85.00", contenido);
+        Assert.Contains("120.00", contenido);
+        Assert.Contains("95.00", contenido);
+        Assert.Contains("Disponible", contenido);
+        Assert.Contains("Agotado", contenido);
+    }
 
     public void Dispose()
     {

@@ -1,47 +1,100 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#244638" />
+    <meta name="description"
+          content="Alma Floral: arreglos florales, plantas y detalles para acompañar tus momentos especiales." />
+
     <title>@ViewData["Title"] - Alma Floral</title>
-    <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlmaFloral.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Alma Floral</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+        <div class="brand-strip">
+            Detalles que florecen, momentos que se quedan
+        </div>
+
+        <nav class="navbar navbar-expand-md navbar-light"
+             aria-label="Navegación principal">
+            <div class="container">
+                <a class="navbar-brand brand"
+                   asp-controller="Home" asp-action="Index">
+                    <span class="brand-symbol" aria-hidden="true">✿</span>
+                    <span>
+                        <span class="brand-name">Alma Floral</span>
+                        <span class="brand-caption">FLORES Y DETALLES</span>
+                    </span>
+                </a>
+
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#menuPrincipal"
+                        aria-controls="menuPrincipal"
+                        aria-expanded="false"
+                        aria-label="Abrir o cerrar menú">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+                    <ul class="navbar-nav ms-auto align-items-md-center gap-md-3">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            <a class="nav-link"
+                               asp-controller="Home" asp-action="Index">
+                                Inicio
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link"
+                            asp-controller="Catalogo" asp-action="Index">
+                            Catálogo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home" asp-action="Index"
+                               asp-fragment="propuesta">
+                                Nuestra propuesta
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home" asp-action="Privacy">
+                                Privacidad
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Alma Floral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main id="contenido" class="container main-content" tabindex="-1">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div>
+                <a class="footer-brand"
+                   asp-controller="Home" asp-action="Index">
+                    Alma Floral
+                </a>
+                <p>Flores para acompañar tus momentos especiales.</p>
+            </div>
+            <div class="footer-links">
+                <span>&copy; @DateTime.Now.Year Alma Floral</span>
+                <a asp-controller="Home" asp-action="Privacy">Privacidad</a>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
