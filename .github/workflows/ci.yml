@@ -1,0 +1,38 @@
+name: Integracion continua Alma Floral
+
+on:
+  push:
+    branches:
+      - develop
+      - ci/integracion-continua
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    name: Compilar y ejecutar pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar codigo del repositorio
+        uses: actions/checkout@v7
+
+      - name: Preparar .NET 10
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restaurar dependencias
+        run: dotnet restore tests/AlmaFloral.Web.Tests/AlmaFloral.Web.Tests.csproj
+
+      - name: Compilar aplicacion y pruebas
+        run: dotnet build tests/AlmaFloral.Web.Tests/AlmaFloral.Web.Tests.csproj --configuration Release --no-restore
+
+      - name: Ejecutar pruebas automatizadas
+        run: dotnet test tests/AlmaFloral.Web.Tests/AlmaFloral.Web.Tests.csproj --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
