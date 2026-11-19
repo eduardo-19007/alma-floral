@@ -1,0 +1,88 @@
+@model List<AlmaFloral.Web.Models.Producto>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Catálogo";
+    var culturaPeru = CultureInfo.GetCultureInfo("es-PE");
+}
+
+<section class="catalog-heading" aria-labelledby="catalogo-titulo">
+    <p class="eyebrow">FLORES Y DETALLES</p>
+    <h1 id="catalogo-titulo">Un detalle para cada momento.</h1>
+    <p>
+        Explora nuestros arreglos florales y plantas.
+        Encuentra una forma especial de expresar lo que sientes.
+    </p>
+</section>
+
+@if (Model.Count == 0)
+{
+    <p class="catalog-empty" role="status">
+        Por el momento no hay productos disponibles para mostrar.
+    </p>
+}
+else
+{
+    <div class="catalog-summary">
+        <p>@Model.Count productos en nuestra selección</p>
+        <span>Precios en soles</span>
+    </div>
+
+    <section class="product-grid" aria-label="Productos del catálogo">
+        @foreach (var producto in Model)
+        {
+            var tono = producto.Id switch
+            {
+                1 => "product-rose",
+                2 => "product-sage",
+                _ => "product-lilac"
+            };
+
+            <article class="product-card">
+                <div class="product-visual @tono" aria-hidden="true">
+                    <span class="product-flower">✿</span>
+                    <span class="product-visual-caption">ALMA FLORAL</span>
+                </div>
+
+                <div class="product-content">
+                    <div class="product-status">
+                        @if (producto.Stock > 0)
+                        {
+                            <span class="stock-label stock-available">
+                                Disponible
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="stock-label stock-unavailable">
+                                Agotado
+                            </span>
+                        }
+                    </div>
+
+                    <h2>@producto.Nombre</h2>
+                    <p class="product-description">@producto.Descripcion</p>
+
+                    <div class="product-bottom">
+                        <p class="product-price">
+                            S/ @producto.Precio.ToString("N2", culturaPeru)
+                        </p>
+
+                        @if (producto.Stock > 0)
+                        {
+                            <span class="product-stock">
+                                @producto.Stock unidades disponibles
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="product-stock">
+                                Sin existencias
+                            </span>
+                        }
+                    </div>
+                </div>
+            </article>
+        }
+    </section>
+}

@@ -2,62 +2,131 @@
     ViewData["Title"] = "Inicio";
 }
 
-<section class="rounded-3 p-4 p-md-5 mb-4"
-         style="background-color: #f3f6ef;">
-    <p class="text-uppercase fw-semibold text-success mb-2">
-        Florería Alma Floral
-    </p>
+<section class="floral-hero" aria-labelledby="titulo-inicio">
+    <div class="hero-copy">
+        <p class="eyebrow">FLORERÍA ALMA FLORAL</p>
+        <h1 id="titulo-inicio">
+            Hay momentos que merecen <em>florecer.</em>
+        </h1>
+        <p class="hero-description">
+            Arreglos florales, plantas y pequeños detalles para expresar
+            lo que sientes y acompañar a quienes más quieres.
+        </p>
+        <a class="floral-button"
+            asp-controller="Catalogo" asp-action="Index">
+            Explorar el catálogo <span aria-hidden="true">↗</span>
+        </a>
+        <p class="hero-note">Un detalle especial para cada ocasión.</p>
+    </div>
 
-    <h1 class="display-5 fw-bold" style="color: #214e35;">
-        Flores para acompañar tus momentos especiales
-    </h1>
+    <div class="hero-art">
+        <svg viewBox="0 0 420 460" role="img"
+             aria-labelledby="flores-titulo">
+            <title id="flores-titulo">
+                Ilustración de un arreglo floral en un florero
+            </title>
+            <ellipse cx="210" cy="423" rx="115" ry="15" fill="#d9decc" />
 
-    <p class="lead mt-3 mb-0">
-        Arreglos florales personalizados, plantas decorativas
-        y regalos para compartir.
-    </p>
+            <g fill="none" stroke="#526d48" stroke-width="5"
+               stroke-linecap="round">
+                <path d="M210 345 Q205 230 140 137" />
+                <path d="M210 345 Q210 210 222 105" />
+                <path d="M210 345 Q250 235 300 170" />
+            </g>
+
+            <g fill="#748868">
+                <ellipse cx="173" cy="245" rx="19" ry="44"
+                         transform="rotate(-45 173 245)" />
+                <ellipse cx="248" cy="269" rx="18" ry="43"
+                         transform="rotate(44 248 269)" />
+                <ellipse cx="224" cy="196" rx="15" ry="33"
+                         transform="rotate(30 224 196)" />
+            </g>
+
+            <g fill="#d5a196">
+                <ellipse cx="140" cy="112" rx="25" ry="37" />
+                <ellipse cx="140" cy="162" rx="25" ry="37" />
+                <ellipse cx="115" cy="137" rx="37" ry="25" />
+                <ellipse cx="165" cy="137" rx="37" ry="25" />
+            </g>
+            <circle cx="140" cy="137" r="19" fill="#eed6a5" />
+
+            <g fill="#f5edd8">
+                <ellipse cx="222" cy="80" rx="22" ry="34" />
+                <ellipse cx="222" cy="130" rx="22" ry="34" />
+                <ellipse cx="197" cy="105" rx="34" ry="22" />
+                <ellipse cx="247" cy="105" rx="34" ry="22" />
+            </g>
+            <circle cx="222" cy="105" r="17" fill="#b79a58" />
+
+            <g fill="#b9a5b5">
+                <ellipse cx="300" cy="147" rx="22" ry="32" />
+                <ellipse cx="300" cy="193" rx="22" ry="32" />
+                <ellipse cx="277" cy="170" rx="32" ry="22" />
+                <ellipse cx="323" cy="170" rx="32" ry="22" />
+            </g>
+            <circle cx="300" cy="170" r="16" fill="#f0d7a1" />
+
+            <path d="M156 318 H264 L250 406
+                     Q210 433 170 406 Z" fill="#b66f52" />
+            <path d="M169 329 L180 398"
+                  stroke="#d69877" stroke-width="7"
+                  stroke-linecap="round" />
+            <ellipse cx="210" cy="318" rx="54" ry="10" fill="#975b43" />
+        </svg>
+        <span class="art-label">Inspirados en la naturaleza</span>
+    </div>
 </section>
 
-<section aria-labelledby="servicios-titulo">
-    <h2 id="servicios-titulo" class="mb-4">
-        Conoce nuestra propuesta
-    </h2>
-
-    <div class="row g-4">
-        <div class="col-md-4">
-            <article class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <h3 class="h5 text-success">Arreglos florales</h3>
-                    <p class="mb-0">
-                        Composiciones florales para cumpleaños,
-                        aniversarios y otras ocasiones especiales.
-                    </p>
-                </div>
-            </article>
+<section id="propuesta" class="proposal-section"
+         aria-labelledby="propuesta-titulo">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">EL ARTE DE REGALAR</p>
+            <h2 id="propuesta-titulo">Detalles con significado</h2>
         </div>
-
-        <div class="col-md-4">
-            <article class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <h3 class="h5 text-success">Plantas decorativas</h3>
-                    <p class="mb-0">
-                        Opciones naturales para dar vida
-                        a tus espacios y compartir como regalo.
-                    </p>
-                </div>
-            </article>
-        </div>
-
-        <div class="col-md-4">
-            <article class="card h-100 border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <h3 class="h5 text-success">Atención personalizada</h3>
-                    <p class="mb-0">
-                        Orientación para elegir los productos
-                        que acompañen cada ocasión.
-                    </p>
-                </div>
-            </article>
-        </div>
+        <p>
+            Un cumpleaños, un agradecimiento o simplemente
+            las ganas de alegrar el día.
+        </p>
     </div>
+
+    <div class="proposal-grid">
+        <article class="proposal-card rose-card">
+            <span class="card-number" aria-hidden="true">01</span>
+            <p class="card-category">PARA CELEBRAR</p>
+            <h3>Arreglos florales</h3>
+            <p>
+                Composiciones para cumpleaños, aniversarios
+                y esos momentos que quieres recordar.
+            </p>
+        </article>
+
+        <article class="proposal-card sage-card">
+            <span class="card-number" aria-hidden="true">02</span>
+            <p class="card-category">PARA DAR VIDA</p>
+            <h3>Plantas decorativas</h3>
+            <p>
+                Un toque natural para transformar tus espacios
+                o compartir un regalo que sigue creciendo.
+            </p>
+        </article>
+
+        <article class="proposal-card cream-card">
+            <span class="card-number" aria-hidden="true">03</span>
+            <p class="card-category">PARA CADA PERSONA</p>
+            <h3>Atención personalizada</h3>
+            <p>
+                Orientación para elegir el detalle que mejor
+                acompañe cada ocasión.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="closing-message" aria-labelledby="cierre-titulo">
+    <span aria-hidden="true">✿</span>
+    <p class="eyebrow">EL VALOR DE UN PEQUEÑO GESTO</p>
+    <h2 id="cierre-titulo">Regala flores. Comparte emociones.</h2>
+    <p>Porque un detalle puede convertir un día cualquiera en uno especial.</p>
 </section>

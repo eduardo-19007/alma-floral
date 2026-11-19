@@ -1,48 +1,137 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* Estilos del encabezado y pie de página compartidos. */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+.site-header {
+    background: #fffdf8;
+    border-bottom: 1px solid #e4e8df;
 }
 
-a {
-  color: #0077cc;
+.brand-strip {
+    padding: 9px 16px;
+    background: #244638;
+    color: #fffdf8;
+    text-align: center;
+    font-size: .78rem;
+    letter-spacing: .06em;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar {
+    padding: 18px 0;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.brand {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px;
+    color: #244638;
+    text-decoration: none;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.brand:hover,
+.brand:focus {
+    color: #244638;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.brand-symbol {
+    font-size: 2.6rem;
+    line-height: 1;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.brand-name {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+    line-height: 1.15;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.brand-caption {
+    display: block;
+    margin-top: 5px;
+    font-size: .58rem;
+    letter-spacing: .23em;
+}
+
+.navbar-nav .nav-link {
+    padding: 10px 12px;
+    color: #435348;
+    font-size: .92rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #244638;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.main-content {
+    flex: 1;
+    padding-top: 32px;
+    padding-bottom: 64px;
+}
+
+.site-footer {
+    padding: 36px 0;
+    background: #244638;
+    color: #f5f3e9;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-brand {
+    color: #fffdf8;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.site-footer p {
+    margin: 8px 0 0;
+    color: #d5ded4;
+    font-size: .85rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: .82rem;
+}
+
+.footer-links a {
+    color: #fffdf8;
+    text-underline-offset: 4px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 1100;
+    padding: 12px 18px;
+    background: #fff;
+    color: #244638;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        padding: 14px 0;
+    }
+
+    .navbar-collapse {
+        padding-top: 16px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
