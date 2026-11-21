@@ -37,7 +37,15 @@ builder.Services.AddRateLimiter(o=>{
    PermitLimit=20,Window=TimeSpan.FromMinutes(1),QueueLimit=0,AutoReplenishment=true}));
 });
 var app = builder.Build();
-if(app.Environment.IsDevelopment()) await AdministradorInicial.CrearAsync(app.Services,app.Configuration);
+// Comando de mantenimiento: no abre el servidor ni modifica usuarios existentes.
+if (args.Contains("--crear-administrador", StringComparer.Ordinal))
+{
+    await AdministradorInicial.CrearAsync(app.Services, app.Configuration, requerido: true);
+    Console.WriteLine("Administrador verificado. Se conservan las credenciales si ya existía.");
+    return;
+}
+if (app.Environment.IsDevelopment())
+    await AdministradorInicial.CrearAsync(app.Services, app.Configuration);
 
 
 // Configure the HTTP request pipeline.
