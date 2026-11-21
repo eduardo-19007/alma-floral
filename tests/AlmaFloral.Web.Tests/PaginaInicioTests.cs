@@ -7,20 +7,15 @@ using Xunit;
 namespace AlmaFloral.Web.Tests;
 
 public class PaginaInicioTests :
-    IClassFixture<WebApplicationFactory<HomeController>>,
+    IClassFixture<AplicacionPruebas>,
     IDisposable
 {
     private readonly HttpClient _cliente;
 
-    public PaginaInicioTests(
-        WebApplicationFactory<HomeController> fabrica)
+    public PaginaInicioTests(AplicacionPruebas fabrica)
     {
-        _cliente = fabrica
-            .WithWebHostBuilder(builder =>
-            {
-                builder.UseEnvironment("Development");
-            })
-            .CreateClient(new WebApplicationFactoryClientOptions
+        _cliente = fabrica.CreateClient(
+            new WebApplicationFactoryClientOptions
             {
                 BaseAddress = new Uri("https://localhost"),
                 AllowAutoRedirect = false

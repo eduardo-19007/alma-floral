@@ -1,0 +1,5 @@
+@model AlmaFloral.Web.Models.Pedido
+@{ ViewData["Title"] = "Pedido registrado"; }
+<section class="order-heading"><p class="eyebrow">GRACIAS POR ELEGIR ALMA FLORAL</p><h1>Tu pedido ya está registrado.</h1><p>Guarda tu código. Podrás consultar el estado con este código y el teléfono que registraste.</p></section>
+<partial name="_Resumen" model="Model" />
+<div class="order-actions"><a class="floral-button" asp-action="Consultar">Consultar un pedido</a><a asp-controller="Catalogo" asp-action="Index">Seguir explorando</a></div>

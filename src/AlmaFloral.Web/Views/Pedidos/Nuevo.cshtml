@@ -1,0 +1,43 @@
+@model AlmaFloral.Web.ViewModels.NuevoPedidoViewModel
+@using AlmaFloral.Web.Models
+@using System.Globalization
+@{
+    ViewData["Title"] = "Solicitar pedido";
+    var producto = (Producto)ViewData["Producto"]!;
+    var cultura = CultureInfo.GetCultureInfo("es-PE");
+}
+<section class="order-heading">
+    <p class="eyebrow">UN DETALLE QUE ILUSIONA</p>
+    <h1>Preparamos tu próximo detalle.</h1>
+    <p>Completa tus datos para registrar la solicitud y reservar las unidades disponibles.</p>
+</section>
+<div class="order-grid">
+    <aside class="order-panel order-summary">
+        <span class="order-flower" aria-hidden="true">✿</span>
+        <h2>@producto.Nombre</h2>
+        <p>@producto.Descripcion</p>
+        <p class="order-price">S/ @producto.Precio.ToString("N2", cultura) <small>por unidad</small></p>
+        <p>@producto.Stock unidades disponibles</p>
+        <hr />
+        <p>La solicitud queda en estado <strong>Pendiente</strong>. No se realiza ningún cobro en esta página.</p>
+        <a asp-controller="Catalogo" asp-action="Index">Volver al catálogo</a>
+    </aside>
+    <form asp-controller="Pedidos" asp-action="Nuevo" method="post" class="order-panel order-form">
+        <h2>Datos del pedido</h2>
+        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+        <input asp-for="ProductoId" type="hidden" />
+        <div class="order-fields">
+            <div class="field-wide"><label asp-for="Nombre"></label><input asp-for="Nombre" class="form-control" autocomplete="name" /><span asp-validation-for="Nombre" class="text-danger"></span></div>
+            <div><label asp-for="Telefono"></label><input asp-for="Telefono" class="form-control" type="tel" autocomplete="tel" /><span asp-validation-for="Telefono" class="text-danger"></span></div>
+            <div><label asp-for="Correo"></label><input asp-for="Correo" class="form-control" autocomplete="email" /><span asp-validation-for="Correo" class="text-danger"></span></div>
+            <div><label asp-for="Cantidad"></label><input asp-for="Cantidad" class="form-control" min="1" max="@Math.Max(1, producto.Stock)" /><span asp-validation-for="Cantidad" class="text-danger"></span></div>
+            <div><label asp-for="ModalidadEntrega"></label><select asp-for="ModalidadEntrega" class="form-select"><option value="Recojo">Recojo</option><option value="Delivery">Delivery</option></select><span asp-validation-for="ModalidadEntrega" class="text-danger"></span></div>
+            <div class="field-wide"><label asp-for="DireccionEntrega"></label><textarea asp-for="DireccionEntrega" class="form-control" rows="2" aria-describedby="direccion-ayuda"></textarea><small id="direccion-ayuda">Obligatoria si seleccionas delivery.</small><span asp-validation-for="DireccionEntrega" class="text-danger"></span></div>
+            <div class="field-wide"><label asp-for="FechaEntregaProgramada"></label><input asp-for="FechaEntregaProgramada" type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control" aria-describedby="fecha-ayuda" /><small id="fecha-ayuda">Selecciona una fecha futura. Hora de Lima (UTC−5).</small><span asp-validation-for="FechaEntregaProgramada" class="text-danger"></span></div>
+        </div>
+        <p class="order-note">Usaremos tus datos para atender este pedido. Consulta nuestra <a asp-controller="Home" asp-action="Privacy">información de privacidad</a>.</p>
+        @if (producto.Stock > 0) { <button class="floral-button" type="submit">Registrar pedido <span aria-hidden="true">↗</span></button> }
+        else { <p class="text-danger" role="status">Este producto ya no tiene existencias disponibles.</p> }
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

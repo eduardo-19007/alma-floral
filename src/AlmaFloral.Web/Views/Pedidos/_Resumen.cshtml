@@ -1,0 +1,17 @@
+@model AlmaFloral.Web.Models.Pedido
+@using System.Globalization
+@{
+    var cultura = CultureInfo.GetCultureInfo("es-PE");
+    var zona = TimeZoneInfo.FindSystemTimeZoneById(OperatingSystem.IsWindows() ? "SA Pacific Standard Time" : "America/Lima");
+    var fecha = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind(Model.FechaEntregaProgramada, DateTimeKind.Utc), zona);
+}
+<section class="order-panel" aria-labelledby="resumen-titulo">
+    <p class="eyebrow">TU DETALLE, PASO A PASO</p>
+    <h2 id="resumen-titulo">Resumen del pedido</h2>
+    <p class="order-code">@Model.Codigo</p>
+    <dl class="order-facts"><div><dt>Estado</dt><dd><span class="stock-label stock-available">@Model.Estado</span></dd></div><div><dt>Modalidad</dt><dd>@Model.ModalidadEntrega</dd></div><div><dt>Fecha programada</dt><dd>@fecha.ToString("dd/MM/yyyy HH:mm") — Lima</dd></div></dl>
+    <div class="table-responsive"><table class="table order-table"><caption>Productos reservados y precios registrados</caption><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio unitario</th><th>Subtotal</th></tr></thead><tbody>
+        @foreach (var detalle in Model.Detalles) { <tr><td>@detalle.Producto.Nombre</td><td>@detalle.Cantidad</td><td>S/ @detalle.PrecioUnitario.ToString("N2", cultura)</td><td>S/ @detalle.Subtotal.ToString("N2", cultura)</td></tr> }
+    </tbody><tfoot><tr><th colspan="3">Total de productos</th><td><strong>S/ @Model.Detalles.Sum(d => d.Subtotal).ToString("N2", cultura)</strong></td></tr></tfoot></table></div>
+    <p class="order-note">Importe de productos. Esta solicitud no acredita un pago. La entrega y cualquier costo adicional requieren coordinación.</p>
+</section>

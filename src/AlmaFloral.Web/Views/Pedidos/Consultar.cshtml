@@ -1,0 +1,17 @@
+@model AlmaFloral.Web.ViewModels.ConsultarPedidoViewModel
+@{ ViewData["Title"] = "Consultar pedido"; }
+<section class="order-heading"><p class="eyebrow">ACOMPAÑAMOS TU DETALLE</p><h1>Consulta tu pedido.</h1><p>Ingresa el código y el teléfono utilizados al registrar tu solicitud.</p></section>
+<form asp-action="Consultar" method="post" class="order-panel order-form lookup-form">
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    <div class="order-fields"><div class="field-wide"><label asp-for="Codigo"></label><input asp-for="Codigo" class="form-control" placeholder="AF-…" autocomplete="off" /><span asp-validation-for="Codigo" class="text-danger"></span></div><div class="field-wide"><label asp-for="Telefono"></label><input asp-for="Telefono" type="tel" class="form-control" autocomplete="tel" /><span asp-validation-for="Telefono" class="text-danger"></span></div></div>
+    <button class="floral-button" type="submit">Consultar estado <span aria-hidden="true">↗</span></button>
+</form>
+@if (Model.Resultado is not null) { <div class="lookup-result"><partial name="_Resumen" model="Model.Resultado" /></div> }
+
+@if(Model.Resultado is not null) {
+ <section class="order-panel lookup-result"><h2>Seguimiento de postventa</h2>
+ @if(Model.Casos.Count==0){<p>No hay solicitudes de postventa vinculadas a este pedido.</p>}
+ @foreach(var c in Model.Casos){<article class="case-item"><h3>Caso #@c.CasoPostventaId · @c.Tipo</h3><p><strong>Estado:</strong> @c.Estado</p><p class="preserve-lines">@c.Descripcion</p>@if(!string.IsNullOrWhiteSpace(c.Respuesta)){<p><strong>Respuesta:</strong> @c.Respuesta</p>}@if(!string.IsNullOrWhiteSpace(c.Acuerdo)){<p><strong>Acuerdo:</strong> @c.Acuerdo</p>}</article>}
+ <a asp-controller="Postventa" asp-action="Nueva">Registrar una solicitud de postventa</a></section>
+}
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

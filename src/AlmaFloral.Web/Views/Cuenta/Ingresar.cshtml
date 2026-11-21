@@ -1,0 +1,5 @@
+@model AlmaFloral.Web.ViewModels.IngresoViewModel
+@{ViewData["Title"]="Acceso administrativo";}
+<section class="order-heading"><p class="eyebrow">ALMA FLORAL · ADMINISTRACIÓN</p><h1>Bienvenido de nuevo.</h1><p>Acceso del personal autorizado para atender pedidos y solicitudes.</p></section>
+<form method="post" asp-action="Ingresar" class="order-panel order-form lookup-form"><input asp-for="ReturnUrl" type="hidden" /><div asp-validation-summary="All" class="text-danger" role="alert"></div><div class="order-fields"><div class="field-wide"><label asp-for="Correo"></label><input asp-for="Correo" class="form-control" autocomplete="username" /></div><div class="field-wide"><label asp-for="Contrasena"></label><input asp-for="Contrasena" class="form-control" autocomplete="current-password" /></div></div><button class="floral-button" type="submit">Ingresar</button></form>
+@section Scripts {<partial name="_ValidationScriptsPartial" />}
