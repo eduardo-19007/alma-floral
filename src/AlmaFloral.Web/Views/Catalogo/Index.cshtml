@@ -81,6 +81,10 @@ else
                             </span>
                         }
                     </div>
+                    @if (producto.Stock > 0)
+                    {
+                        <a class="floral-button product-order" asp-controller="Pedidos" asp-action="Nuevo" asp-route-productoId="@producto.Id">Solicitar pedido ↗</a>
+                    }
                 </div>
             </article>
         }

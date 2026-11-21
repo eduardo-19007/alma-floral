@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -44,6 +44,8 @@
 
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto align-items-md-center gap-md-3">
+<li class="nav-item"><a class="nav-link" asp-controller="Postventa" asp-action="Nueva">Postventa</a></li>
+<li class="nav-item"><a class="nav-link" asp-controller="Pedidos" asp-action="Consultar">Mi pedido</a></li>
                         <li class="nav-item">
                             <a class="nav-link"
                                asp-controller="Home" asp-action="Index">
@@ -89,6 +91,7 @@
                 <p>Flores para acompañar tus momentos especiales.</p>
             </div>
             <div class="footer-links">
+                @if(User.Identity?.IsAuthenticated == true){<a asp-controller="Administracion" asp-action="Index">Administración</a><form asp-controller="Cuenta" asp-action="Salir" method="post"><button class="footer-signout" type="submit">Cerrar sesión</button></form>}else{<a asp-controller="Cuenta" asp-action="Ingresar">Acceso del personal</a>}
                 <span>&copy; @DateTime.Now.Year Alma Floral</span>
                 <a asp-controller="Home" asp-action="Privacy">Privacidad</a>
             </div>
